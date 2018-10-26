@@ -1,0 +1,17 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	background: #e6e6e6;
+}
+
+#main img {
+	height: auto;
+	width: 100%;
+}
+
+#main .col-md-4{
+	margin-top: 1rem;
+}
