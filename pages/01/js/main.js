@@ -9,31 +9,21 @@ animate();
 function init() {
     // Камера
     camera = new THREE.PerspectiveCamera(45, innerWidth / innerHeight, 1, 1000);
-    camera.position.x = -200;
-    camera.position.y = 200;
-    camera.position.z = -200;
+    camera.position.set(-200, 200, -200);
 
     // Сцена
     scene = new THREE.Scene();
 
     // Освещение
     let pointLight = new THREE.PointLight(0xffffff, 1);
-    pointLight.position.x = -100;
-    pointLight.position.y = 250;
-    pointLight.position.z = -100;
+    pointLight.position.set(-100, 250, 100);
     scene.add(pointLight);
-
-    let pointLightHelper = new THREE.PointLightHelper(pointLight, 5);
-    scene.add(pointLightHelper)
 
     let hemiLight = new THREE.HemisphereLight(0xffffff, 0xffffff, 0.2);
     hemiLight.color.setHSL(0.6, 1, 0.6);
     hemiLight.groundColor.setHSL(0.095, 1, 0.75);
     hemiLight.position.set(0, 150, 0);
     scene.add(hemiLight);
-
-    let hemiLightHelper = new THREE.HemisphereLightHelper(hemiLight, 10);
-    scene.add(hemiLightHelper);
 
     // Сетка
     let helper = new THREE.GridHelper(200, 20, 0xFF4444, 0x404040);
@@ -43,7 +33,6 @@ function init() {
     for (let i = 0; i < 10; i++) {
         for (let j = 0; j < 10; j++) {
             let material = new THREE.MeshLambertMaterial({ color: randomColor() });
-            // let height = randomIntFromRange(5, 50);
             let height = (i + j) * 5;
             let boxGeometry = new THREE.BoxGeometry(10, height, 10);
             let boxMesh = new THREE.Mesh(boxGeometry, material);
