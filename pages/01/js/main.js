@@ -1,6 +1,4 @@
-var scene;
-var camera;
-var renderer;
+var scene, camera, renderer;
 
 init();
 
@@ -8,20 +6,18 @@ animate();
 
 function init() {
     // Камера
-    camera = new THREE.PerspectiveCamera(45, innerWidth / innerHeight, 1, 1000);
+    camera = new THREE.PerspectiveCamera(45, innerWidth / innerHeight, 1, 1000000);
     camera.position.set(-200, 200, -200);
 
     // Сцена
     scene = new THREE.Scene();
 
     // Освещение
-    let pointLight = new THREE.PointLight(0xffffff, 1);
+    let pointLight = new THREE.PointLight(0xffffff, 0.5);
     pointLight.position.set(-100, 250, 100);
     scene.add(pointLight);
 
-    let hemiLight = new THREE.HemisphereLight(0xffffff, 0xffffff, 0.2);
-    hemiLight.color.setHSL(0.6, 1, 0.6);
-    hemiLight.groundColor.setHSL(0.095, 1, 0.75);
+    let hemiLight = new THREE.HemisphereLight(0xffffff, 0xffffff, 0.5);
     hemiLight.position.set(0, 150, 0);
     scene.add(hemiLight);
 
@@ -33,7 +29,7 @@ function init() {
     for (let i = 0; i < 10; i++) {
         for (let j = 0; j < 10; j++) {
             let material = new THREE.MeshLambertMaterial({ color: randomColor() });
-            let height = (i + j) * 5;
+            let height = (i + j) * 5 + 2;
             let boxGeometry = new THREE.BoxGeometry(10, height, 10);
             let boxMesh = new THREE.Mesh(boxGeometry, material);
             boxMesh.position.x = i * 10 - 45;

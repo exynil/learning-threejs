@@ -15,23 +15,16 @@ function init() {
     camera = new THREE.PerspectiveCamera(45, innerWidth / innerHeight, 1, 1000000);
     camera.position.set(0, 150, 200);
 
-    // Освещение
-    let hemiLight = new THREE.HemisphereLight(0xffffff, 0xffffff, 0.2);
-    hemiLight.color.setHSL(0.6, 1, 0.6);
-    hemiLight.groundColor.setHSL(0.095, 1, 0.75);
-    hemiLight.position.set(0, 150, 0);
-    scene.add(hemiLight);
-
     // Частицы
     particles = new Array();
-    var map = new THREE.TextureLoader().load('./img/textures/sprites/disc.png');
+    let map = new THREE.TextureLoader().load('./img/textures/sprites/disc.png');
     let material = new THREE.SpriteMaterial({ color: 0x31F7F7, map: map });
 
     for (let ix = 0; ix < AMOUNTX; ix++) {
-        for (let iz = 0; iz < AMOUNTY; iz++) {
-            particle = particles[ix * AMOUNTY + iz] = new THREE.Sprite(material);
+        for (let iy = 0; iy < AMOUNTY; iy++) {
+            particle = particles[ix * AMOUNTY + iy] = new THREE.Sprite(material);
             particle.position.x = ix * SEPARATION - ((AMOUNTX * SEPARATION) / 2);
-            particle.position.z = iz * SEPARATION - ((AMOUNTY * SEPARATION) / 2);
+            particle.position.z = iy * SEPARATION - ((AMOUNTY * SEPARATION) / 2);
             scene.add(particle);
         }
     }
