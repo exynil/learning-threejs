@@ -13,7 +13,7 @@ class LightVehicle {
         let a = Math.random();
         let b = Math.random
         this.light.position.x = Math.sin( time * this.x ) * d;
-        this.light.position.y = Math.cos( time * this.z ) * d;
-        this.light.position.z = 10;
+        this.light.position.y = Math.cos( time * this.y ) * d;
+        this.light.position.z = 20;
     }
 }

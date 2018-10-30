@@ -20,11 +20,11 @@ function init() {
         roughness: 0.8,
         color: 0xffffff,
         metalness: 0.2,
-        bumpScale: 0.0005
+        bumpScale: 0.0005,
     });
 
     let textureLoader = new THREE.TextureLoader();
-    textureLoader.load('./img/photo_diffuse.jpg', function (map) {
+    textureLoader.load('img/photo_diffuse.jpg', function (map) {
         map.wrapS = THREE.RepeatWrapping;
         map.wrapT = THREE.RepeatWrapping;
         map.anisotropy = 4;
@@ -38,6 +38,27 @@ function init() {
     pictureMesh.receiveShadow = true;
     scene.add(pictureMesh);
 
+    let loader = new THREE.FontLoader();
+    loader.load('fonts/helvetiker_regular.typeface.json', function (font) {
+        let xMid, text;
+        let color = 0x006699;
+        let matLite = new THREE.MeshBasicMaterial({
+            color: color,
+            transparent: true,
+            opacity: 1
+        });
+        let message = '<19.10.2018/>';
+        let shapes = font.generateShapes(message, 40);
+        let geometry = new THREE.ShapeBufferGeometry(shapes);
+        geometry.computeBoundingBox();
+        xMid = - 0.5 * (geometry.boundingBox.max.x - geometry.boundingBox.min.x);
+        geometry.translate(xMid, 0, 0);
+        text = new THREE.Mesh(geometry, matLite);
+        text.rotation.z = text.rotation.x = Math.PI;
+        scene.add(text);
+    });
+
+
     // Свет
     lights = new Array();
 
@@ -45,7 +66,7 @@ function init() {
 
     for (let i = 0; i < count; i++) {
         light = new THREE.PointLight(randomColor(), 2.5, 100, 2.0);
-        light.add(new THREE.Mesh(sphere, new THREE.MeshBasicMaterial({color: randomColorFromArray(colors)})))
+        light.add(new THREE.Mesh(sphere, new THREE.MeshBasicMaterial({ color: randomColorFromArray(colors) })))
 
         lights.push(new LightVehicle(light, limitation));
         scene.add(light);
@@ -54,7 +75,7 @@ function init() {
     renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.setSize(innerWidth, innerHeight);
     renderer.gammaInput = true;
-	renderer.gammaOutput = true;
+    renderer.gammaOutput = true;
     document.body.appendChild(renderer.domElement);
 
     stats = new Stats();
