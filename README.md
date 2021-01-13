@@ -1,3 +1,3 @@
 # learning-threejs
 
-Эксперименты с tree.js
+Эксперименты с three.js
